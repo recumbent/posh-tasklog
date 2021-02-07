@@ -2,5 +2,8 @@
 [O|o]bj
 [B|b]in
 
+publish/
+
+
 # Tooling files
 .ionide/symbolCache.db
