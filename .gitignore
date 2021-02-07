@@ -1,0 +1,6 @@
+# Build artefacts
+[O|o]bj
+[B|b]in
+
+# Tooling files
+.ionide/symbolCache.db
