@@ -3,9 +3,6 @@
 open System
 open System.IO
 open System.Management.Automation
-
-
-
     
 [<Cmdlet("Start", "Task")>]
 type GetFooCommand () =
@@ -20,7 +17,7 @@ type GetFooCommand () =
     let formatTitle (taskDate : DateTime) =
         // The title can be more human friendly than the filename
         let formattedDate = taskDate.ToString("dd-MMM-yyyy")
-        $"# Task Log for {formattedDate}/n"
+        $"# Task Log for {formattedDate}"
 
     [<Parameter>]
     member val TaskLogPath : string = "" with get, set
@@ -29,12 +26,17 @@ type GetFooCommand () =
     member val Title : string = "" with get, set
 
     override cmdlet.ProcessRecord () =
-        let taskDate = DateTime.Today
+        let timestamp = DateTime.Now
+        let taskDate = timestamp.Date
+        
         let filePath = makeTaskFilePath cmdlet cmdlet.TaskLogPath taskDate
         let info = FileInfo filePath
         if not info.Exists then
             cmdlet.WriteInformation("Creating tast file", [||])
             let fileTitle = formatTitle taskDate
-            File.WriteAllText(filePath, fileTitle)
-        
+            File.WriteAllLines(filePath, [ fileTitle; String.Empty ])
+    
+        let formattedTime = timestamp.ToString("HH:mm")
+        let taskHeading = $"## {formattedTime} - {cmdlet.Title}"
+        File.AppendAllLines(filePath, [ taskHeading; String.Empty])
         ()
