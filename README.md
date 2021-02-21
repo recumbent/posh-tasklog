@@ -13,12 +13,31 @@ Written in F# - because (-:
 ## Plan
 
 1. [x] Work through an example of an F# cmdlet
-1. [ ] Document Start funcitonality
+1. [ ] Document Start functionality
 1. [x] Can I test with Pester ?? See [Pester](https://pester.dev)
-   1. [ ] Yes if I can set up a test drive and use it as the target for my commands
+   1. [x] Yes if I can set up a test drive and use it as the target for my commands
    1. [ ] This also means that I need to understand `$psdefaultparametervalues`
-1. Implement test functionality
-1. Wrap it in a module, because this is generally "better"
+1. [ ] Implement test functionality
+   1. [ ] Create file if missing
+   1. [ ] Don't create file if it already exists (file count should be unchange, content should be persisted)
+   1. [ ] Add title (same test, in both cases, its two tests)
+   1. [ ] Add end task, have to do this as a #end:HH:mm tag?
+   1. [ ] Add note capability, notes are plain text, so really simple
+   1. [ ] Add note parameter to start
+   1. [ ] Add note parameter to end (note should, for now, follow timestamp)
+1. [ ] Wrap it in a module, because this is generally "better"
+
+## Note to self...
+
+Create Tasklog: as a PS Drive (in one's profile) in order to make life easier (ish)
+
+Then set it as the default -TaskLogPath parameter because that really will make life easier (c.f. `$psdefaultparametervalues`)
+
+Then how do I wire the above into profiles that I use (import the module etc) but maybe keeps some clean?
+
+Then how do I set up to publish / install / update said module trivially (there's a build process in there somewhere)
+
+Baby steps...
 
 ## Testing
 
