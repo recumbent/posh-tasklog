@@ -20,7 +20,7 @@ type GetFooCommand () =
     let formatTitle (taskDate : DateTime) =
         // The title can be more human friendly than the filename
         let formattedDate = taskDate.ToString("dd-MMM-yyyy")
-        $"# {formattedDate} - Task Log/n"
+        $"# Task Log for {formattedDate}/n"
 
     [<Parameter>]
     member val TaskLogPath : string = "" with get, set

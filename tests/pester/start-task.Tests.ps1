@@ -3,14 +3,27 @@ BeforeAll {
 }
 
 Describe "start-task" {
-    It "Start something should create a file if it doesn't exist" {
+    Context "No file for today" {
+
+        BeforeAll {
+            # This is the arrange and "act" for the tests...
+            Start-task -TasklogPath "TestDrive:\" "A test task title"
+        }
         
-        $date = Get-Date -Format "yyyy-MM-dd"
-        $taskLogFileName = $date + ".md"
-        $path = "TestDrive:\" + $taskLogFileName
+        It "Should create a file" {
+            $date = Get-Date -Format "yyyy-MM-dd"
+            $taskLogFileName = $date + ".md"
+            $path = "TestDrive:\" + $taskLogFileName
+                
+            $path | Should -Exist
+        }
         
-        Start-task -TasklogPath "TestDrive:\" "A test task title"
-        
-        $path | Should -Exist
+        It "Should write a title to the file" {
+            $date = Get-Date -Format "yyyy-MM-dd"
+            $taskLogFileName = $date + ".md"
+            $path = "TestDrive:\" + $taskLogFileName
+
+            $path | Should -FileContentMatch "# Task log for"
+        }
     }
 }
