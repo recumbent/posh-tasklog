@@ -43,12 +43,17 @@ Baby steps...
 
 Because I'm writing a Cmdlet I (probably) want tot use pester to do at least some testing - of an integration type nature where I'm testing calling the comdlets rather than anything where I test the internal function of the code (allowing that these are similar).
 
-For pester to work its assumed that the test module will be in the "publish" folder off the root.
+For pester to work its assumed that the test module will be in the "publish" folder off the root: `dotnet publish -o publish`
 
-Run invoke-pester from the root, things _should_ pass
+Run invoke-pester from the root, things _should_ pass. But it will lock the .dll so use `pwsh -Command invoke-pester` to wrap the import of the module into a process that goes away after the test finish.
+
+## Usage
+
+I can do multiline notes using here strings `@"..."@`. In theory at least, which makes this all the better really!
 
 ## References
 
 * [Nate Lehman - Writing PowerShell Modules in F#](https://medium.com/@natelehman/writing-powershell-modules-in-f-ed52704d97ed)
 * [Pester](https://pester.dev)
+* [Managing Windows PowerShell Drives](https://docs.microsoft.com/en-us/powershell/scripting/samples/managing-windows-powershell-drives?view=powershell-7.1)
 * 
