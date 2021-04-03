@@ -13,19 +13,27 @@ Written in F# - because (-:
 ## Plan
 
 1. [x] Work through an example of an F# cmdlet
-1. [ ] Document Start functionality
+1. [ ] Document Start-task functionality
+1. [ ] Document Stop-task functionality
+1. [ ] Document Add-TaskNote functionality
 1. [x] Can I test with Pester ?? See [Pester](https://pester.dev)
    1. [x] Yes if I can set up a test drive and use it as the target for my commands
    1. [ ] This also means that I need to understand `$psdefaultparametervalues` because if I'm requiring a target folder I don't want to have to type it every time
 1. [ ] Implement test functionality
-   1. [ ] Create file if missing
-   1. [ ] Don't create file if it already exists (file count should be unchange, content should be persisted)
-   1. [ ] Add title (same test, in both cases, its two tests)
-   1. [ ] Add end task, have to do this as a #end:HH:mm tag?
+   1. [x] Create file if missing
+   1. [x] Don't create file if it already exists (file count should be unchange, content should be persisted)
+   1. [x] Add title (same test, in both cases, its two tests)
+   1. [ ] Add stop task, have to do this as a #end:HH:mm tag?
+      1. [ ]  Does not create a file if no file found
+      1. [ ]  Returns a warning if no file found
+      1. [ ]  Assumes there is an active task (for simplicity, may change later) so will always work
+      1. [ ]  Lets add an HR after, because...
    1. [ ] Add note capability, notes are plain text, so really simple
    1. [ ] Add note parameter to start
    1. [ ] Add note parameter to end (note should, for now, follow timestamp)
+1. [ ] Use verbs from library properly if you're not already
 1. [ ] Wrap it in a module, because this is generally "better"
+1. [ ] How can I publish for personal use? (Installable, updateable)
 
 ## Note to self...
 

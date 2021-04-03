@@ -14,7 +14,7 @@ Describe "start-task" {
             $timestamp = Get-Date -Format "HH:mm"
             
             # Act
-            Start-task -TasklogPath "TestDrive:\" $task
+            Start-Task -TasklogPath "TestDrive:\" $task
         }
         
         It "Should create a file" {
@@ -52,7 +52,7 @@ Random content: $random
             $content | out-file -FilePath $path -Encoding utf8
             
             # Act
-            Start-task -TasklogPath "TestDrive:\" $task
+            Start-Task -TasklogPath "TestDrive:\" $task
         }
         
         It "Should not create a file" {
@@ -73,5 +73,4 @@ Random content: $random
             Get-Content $path | Write-Host
         }
     }
-
 }
