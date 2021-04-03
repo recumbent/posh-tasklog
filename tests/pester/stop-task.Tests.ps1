@@ -10,7 +10,6 @@ Describe "stop-task" {
             $date = Get-Date -Format "yyyy-MM-dd"
             $taskLogFileName = $date + ".md"
             $path = "TestDrive:\" + $taskLogFileName
-            $timestamp = Get-Date -Format "HH:mm"
 
             $initialCount = Get-ChildItem "TestDrive:\" | Measure-Object | Select-Object -ExpandProperty Count  
            
@@ -23,6 +22,38 @@ Describe "stop-task" {
 
             $path | Should -Not -Exist
             $currentCount | Should -Be $initialCount
+        }
+    }
+
+    Context "File for today" {
+        BeforeAll {
+            # Arrange 
+            $date = Get-Date -Format "yyyy-MM-dd"
+            $timestamp = Get-Date -Format "HH:mm"
+            $taskLogFileName = $date + ".md"
+            $path = "TestDrive:\" + $taskLogFileName
+            
+            $content = @"
+# Task log for 03-Apr-2021
+
+## 12:34 - Something started
+
+"@
+            
+            $content | out-file -FilePath $path -Encoding utf8
+
+            $initialCount = Get-ChildItem "TestDrive:\" | Measure-Object | Select-Object -ExpandProperty Count
+        }
+
+        It "Should not add a new file" {
+            $currentCount = Get-ChildItem "TestDrive:\" | Measure-Object | Select-Object -ExpandProperty Count  
+
+            $currentCount | Should -Be $initialCount
+        }
+
+        It "Should cotain a timestamped end" {
+            $expected = "#end: $timestamp"
+            $path | Should -FileContentMatch $expected
         }
     }
 }

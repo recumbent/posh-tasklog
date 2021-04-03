@@ -39,7 +39,7 @@ type StartTaskCommand () =
     
         let formattedTime = timestamp.ToString("HH:mm")
         let taskHeading = $"## {formattedTime} - {cmdlet.Title}"
-        File.AppendAllLines(filePath, [ taskHeading; String.Empty])
+        File.AppendAllLines(filePath, [ taskHeading; String.Empty ])
         ()
 
 [<Cmdlet("Stop", "Task")>]
@@ -50,4 +50,14 @@ type StopTaskCommand () =
     member val TaskLogPath : string = "" with get, set
 
     override cmdlet.ProcessRecord () =
+        let timestamp = DateTime.Now
+        let taskDate = timestamp.Date
+        
+        let filePath = Helpers.makeTaskFilePath cmdlet cmdlet.TaskLogPath taskDate
+        let info = FileInfo filePath
+        if info.Exists then
+            let formattedTime = timestamp.ToString("HH:mm")
+            let endEntry = $"#end: {formattedTime}"
+            File.AppendAllLines(filePath, [ endEntry; String.Empty ])
+
         ()
