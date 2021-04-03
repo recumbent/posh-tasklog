@@ -7,8 +7,8 @@ Written in F# - because (-:
 ## Commands
 
 * Start something - it needs a title
-* Stop whatever it is I last started
-* Note something, assumed to be part of whatever it is I'm working
+* Stop - whatever it is I last started
+* Note something - assumed to be part of whatever it is I'm working, timestamp might be good, need option to not have timestamp (not sure what the default should be)
 
 ## Plan
 
@@ -16,7 +16,7 @@ Written in F# - because (-:
 1. [ ] Document Start functionality
 1. [x] Can I test with Pester ?? See [Pester](https://pester.dev)
    1. [x] Yes if I can set up a test drive and use it as the target for my commands
-   1. [ ] This also means that I need to understand `$psdefaultparametervalues`
+   1. [ ] This also means that I need to understand `$psdefaultparametervalues` because if I'm requiring a target folder I don't want to have to type it every time
 1. [ ] Implement test functionality
    1. [ ] Create file if missing
    1. [ ] Don't create file if it already exists (file count should be unchange, content should be persisted)
@@ -31,7 +31,7 @@ Written in F# - because (-:
 
 Create Tasklog: as a PS Drive (in one's profile) in order to make life easier (ish)
 
-Then set it as the default -TaskLogPath parameter because that really will make life easier (c.f. `$psdefaultparametervalues`)
+Then set it as the default -TaskLogPath parameter because that really will make life easier (c.f. [`$psdefaultparametervalues`](https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_parameters_default_values?view=powershell-7.1))
 
 Then how do I wire the above into profiles that I use (import the module etc) but maybe keeps some clean?
 
