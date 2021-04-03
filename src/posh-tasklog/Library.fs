@@ -53,11 +53,14 @@ type StopTaskCommand () =
         let timestamp = DateTime.Now
         let taskDate = timestamp.Date
         
+        cmdlet.WriteInformation("I am here", [||])
+        
         let filePath = Helpers.makeTaskFilePath cmdlet cmdlet.TaskLogPath taskDate
         let info = FileInfo filePath
         if info.Exists then
+            cmdlet.WriteInformation("Appending stop to file", [||])
             let formattedTime = timestamp.ToString("HH:mm")
             let endEntry = $"#end: {formattedTime}"
-            File.AppendAllLines(filePath, [ endEntry; String.Empty ])
+            File.AppendAllLines(filePath, [ endEntry; String.Empty; "---"; String.Empty ])
 
         ()

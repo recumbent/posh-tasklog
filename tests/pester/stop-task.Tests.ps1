@@ -43,6 +43,9 @@ Describe "stop-task" {
             $content | out-file -FilePath $path -Encoding utf8
 
             $initialCount = Get-ChildItem "TestDrive:\" | Measure-Object | Select-Object -ExpandProperty Count
+
+            # Act
+            Stop-task -TasklogPath "TestDrive:\"
         }
 
         It "Should not add a new file" {
@@ -54,6 +57,10 @@ Describe "stop-task" {
         It "Should cotain a timestamped end" {
             $expected = "#end: $timestamp"
             $path | Should -FileContentMatch $expected
+        }
+
+        AfterAll {
+            Get-Content $path | Write-Host
         }
     }
 }
