@@ -54,7 +54,7 @@ Describe "stop-task" {
             $currentCount | Should -Be $initialCount
         }
 
-        It "Should cotain a timestamped end" {
+        It "Should contain a timestamped end" {
             $expected = "#end: $timestamp"
             $path | Should -FileContentMatch $expected
         }

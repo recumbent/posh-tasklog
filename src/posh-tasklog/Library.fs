@@ -1,4 +1,4 @@
-﻿namespace PoshTasklog
+namespace PoshTasklog
 
 open System
 open System.IO
@@ -62,5 +62,7 @@ type StopTaskCommand () =
             let formattedTime = timestamp.ToString("HH:mm")
             let endEntry = $"#end: {formattedTime}"
             File.AppendAllLines(filePath, [ endEntry; String.Empty; "---"; String.Empty ])
+        else
+            cmdlet.WriteWarning($"Task file: {filePath} not found")
 
         ()
