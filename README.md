@@ -63,7 +63,11 @@ Because I'm writing a Cmdlet I (probably) want tot use pester to do at least som
 
 For pester to work its assumed that the test module will be in the "publish" folder off the root: `dotnet publish -o publish`
 
-Run invoke-pester from the root, things _should_ pass. But it will lock the .dll so use `pwsh -Command invoke-pester` to wrap the import of the module into a process that goes away after the test finish.
+Run invoke-pester from the root, things _should_ pass. But it will lock the .dll so use `pwsh -Command invoke-pester` to wrap the import of the module into a process that goes away after the test finish.s
+
+### Testing warnings
+
+There is a param -WarningVariable that I should be able to pass when invoking the cmdlet - pass a variable name (without the $) and the text of the warning will be written to the variable. Upon which one can then assert. Not sure if one needs to have the var initialised first (probably not).
 
 ## Usage
 
