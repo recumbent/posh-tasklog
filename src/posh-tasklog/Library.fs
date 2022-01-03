@@ -62,5 +62,31 @@ type StopTaskCommand () =
             let formattedTime = timestamp.ToString("HH:mm")
             let endEntry = $"#end: {formattedTime}"
             File.AppendAllLines(filePath, [ endEntry; String.Empty; "---"; String.Empty ])
+        else
+            cmdlet.WriteWarning($"Task file: {filePath} not found")
+
+        ()
+
+[<Cmdlet("Add", "TaskNote")>]
+type AddTaskNoteCommand () =
+    inherit PSCmdlet ()
+
+    [<Parameter>]
+    member val TaskLogPath : string = "" with get, set
+
+    [<Parameter(Position=0, Mandatory=true)>]
+    member val Note : string = "" with get, set
+
+    override cmdlet.ProcessRecord () =
+        let timestamp = DateTime.Now
+        let taskDate = timestamp.Date
+        
+        let filePath = Helpers.makeTaskFilePath cmdlet cmdlet.TaskLogPath taskDate
+        let info = FileInfo filePath
+        if info.Exists then
+            cmdlet.WriteInformation("Appending note to file", [||])
+            File.AppendAllLines(filePath, [ cmdlet.Note; String.Empty ])
+        else
+            cmdlet.WriteWarning($"Task file: {filePath} not found")
 
         ()

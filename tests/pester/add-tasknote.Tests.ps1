@@ -2,7 +2,7 @@ BeforeAll {
     Import-Module .\publish\posh-tasklog.dll
 }
 
-Describe "stop-task" {
+Describe "add-tasknote" {
     Context "No file for today" {
 
         BeforeAll {
@@ -14,7 +14,7 @@ Describe "stop-task" {
             $initialCount = Get-ChildItem "TestDrive:\" | Measure-Object | Select-Object -ExpandProperty Count  
            
             # Act
-            Stop-task -TasklogPath "TestDrive:\"
+            Add-TaskNote "This is a note that should not get saved" -TasklogPath "TestDrive:\"
         }
 
         It "Should not create a file" {
@@ -22,7 +22,7 @@ Describe "stop-task" {
 
             $path | Should -Not -Exist
             $currentCount | Should -Be $initialCount
-        }
+        }            
     }
 
     Context "File for today" {
@@ -45,7 +45,7 @@ Describe "stop-task" {
             $initialCount = Get-ChildItem "TestDrive:\" | Measure-Object | Select-Object -ExpandProperty Count
 
             # Act
-            Stop-task -TasklogPath "TestDrive:\"
+            Add-TaskNote "This is a task note" -TasklogPath "TestDrive:\"
         }
 
         It "Should not add a new file" {
@@ -54,8 +54,8 @@ Describe "stop-task" {
             $currentCount | Should -Be $initialCount
         }
 
-        It "Should contain a timestamped end" {
-            $expected = "#end: $timestamp"
+        It "Should contain the note text" {
+            $expected = "This is a task note"
             $path | Should -FileContentMatch $expected
         }
 
