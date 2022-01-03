@@ -21,7 +21,7 @@ Written in F# - because (-:
    1. [ ] This also means that I need to understand `$psdefaultparametervalues` because if I'm requiring a target folder I don't want to have to type it every time
 1. [ ] Implement test functionality
    1. [x] Create file if missing
-   1. [x] Don't create file if it already exists (file count should be unchange, content should be persisted)
+   1. [x] Don't create file if it already exists (file count should be unchanged, content should be persisted)
    1. [x] Add title (same test, in both cases, its two tests)
    1. [ ] Add stop task, have to do this as a #end:HH:mm tag?
       1. [ ]  Does not create a file if no file found
@@ -49,7 +49,7 @@ Baby steps...
 
 ## Testing
 
-Because I'm writing a Cmdlet I (probably) want tot use pester to do at least some testing - of an integration type nature where I'm testing calling the comdlets rather than anything where I test the internal function of the code (allowing that these are similar).
+Because I'm writing a Cmdlet I (probably) want to use pester to do at least some testing - of an integration type nature where I'm testing calling the comdlets rather than anything where I test the internal function of the code (allowing that these are similar).
 
 For pester to work its assumed that the test module will be in the "publish" folder off the root: `dotnet publish -o publish`
 

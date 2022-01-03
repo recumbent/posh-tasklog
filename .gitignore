@@ -7,3 +7,6 @@ publish/
 
 # Tooling files
 .ionide/symbolCache.db
+
+.fake
+.ionide
